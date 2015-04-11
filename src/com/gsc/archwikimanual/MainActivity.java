@@ -69,7 +69,11 @@ public class MainActivity extends FragmentActivity implements
 
 		webView = (WebView) findViewById(R.id.webview);
 		webView.setWebViewClient(new myWebViewClient());
-		webView.loadUrl("file:///android_asset/en/Main_page.html");
+		if (savedInstanceState == null) {
+			webView.loadUrl("file:///android_asset/en/Main_page.html");
+		} else {
+			webView.restoreState(savedInstanceState);
+		}
 
 	}
 
@@ -102,6 +106,8 @@ public class MainActivity extends FragmentActivity implements
 			getActionBar().setSelectedNavigationItem(
 					savedInstanceState.getInt(STATE_SELECTED_NAVIGATION_ITEM));
 		}
+		super.onRestoreInstanceState(savedInstanceState);
+		webView.restoreState(savedInstanceState);
 	}
 
 	@Override
@@ -109,6 +115,8 @@ public class MainActivity extends FragmentActivity implements
 		// Serialize the current dropdown position.
 		outState.putInt(STATE_SELECTED_NAVIGATION_ITEM, getActionBar()
 				.getSelectedNavigationIndex());
+		super.onSaveInstanceState(outState);
+		webView.saveState(outState);
 	}
 
 	@Override
