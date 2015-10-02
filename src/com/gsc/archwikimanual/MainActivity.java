@@ -34,13 +34,18 @@ public class MainActivity extends FragmentActivity implements ActionBar.OnNaviga
 	private class myWebViewClient extends WebViewClient {
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
-			String[] urlSplit = new String[2];
-			urlSplit[0] = (String) url.subSequence(0, 4);
-			urlSplit[1] = url.substring(5);
-			String filterUrl = urlSplit[1].replaceAll(":", "__");
-			String visitUrl = new String(urlSplit[0] + ":" + filterUrl);
-			Log.i(TAG, visitUrl);
-			view.loadUrl(visitUrl);
+			if (url.startsWith("file")) {
+				String[] urlSplit = new String[2];
+				urlSplit[0] = (String) url.subSequence(0, 4);
+				urlSplit[1] = url.substring(5);
+				String filterUrl = urlSplit[1].replaceAll(":", "__");
+				String visitUrl = new String(urlSplit[0] + ":" + filterUrl);
+				Log.i(TAG, visitUrl);
+				view.loadUrl(visitUrl);
+			} else if (url.startsWith("http")) {
+				Log.i(TAG, url);
+				view.loadUrl(url);
+			}
 			return true;
 		}
 	}
