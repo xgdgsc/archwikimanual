@@ -19,8 +19,7 @@ import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class MainActivity extends FragmentActivity implements
-		ActionBar.OnNavigationListener {
+public class MainActivity extends FragmentActivity implements ActionBar.OnNavigationListener {
 
 	/**
 	 * The serialization (saved instance state) Bundle key representing the
@@ -59,13 +58,11 @@ public class MainActivity extends FragmentActivity implements
 		// Set up the dropdown list navigation in the action bar.
 
 		actionBar.setListNavigationCallbacks(
-		// Specify a SpinnerAdapter to populate the dropdown list.
-				new ArrayAdapter<String>(getActionBarThemedContextCompat(),
-						android.R.layout.simple_list_item_1,
-						android.R.id.text1, new String[] {
-								getString(R.string.title_main),
-								getString(R.string.title_begin),
-								getString(R.string.title_install) }), this);
+				// Specify a SpinnerAdapter to populate the dropdown list.
+				new ArrayAdapter<String>(getActionBarThemedContextCompat(), android.R.layout.simple_list_item_1,
+						android.R.id.text1, new String[] { getString(R.string.title_main),
+								getString(R.string.title_begin), getString(R.string.title_install) }),
+				this);
 
 		webView = (WebView) findViewById(R.id.webview);
 		webView.setWebViewClient(new myWebViewClient());
@@ -79,11 +76,8 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		// MenuItem settingItem = menu.getItem(R.id.menu_settings);
-		// settingItem.setVisible(false);
-
-		return true;
-	};
+		return false;
+	}
 
 	/**
 	 * Backward-compatible version of {@link ActionBar#getThemedContext()} that
@@ -103,8 +97,7 @@ public class MainActivity extends FragmentActivity implements
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		// Restore the previously serialized current dropdown position.
 		if (savedInstanceState.containsKey(STATE_SELECTED_NAVIGATION_ITEM)) {
-			getActionBar().setSelectedNavigationItem(
-					savedInstanceState.getInt(STATE_SELECTED_NAVIGATION_ITEM));
+			getActionBar().setSelectedNavigationItem(savedInstanceState.getInt(STATE_SELECTED_NAVIGATION_ITEM));
 		}
 		super.onRestoreInstanceState(savedInstanceState);
 		webView.restoreState(savedInstanceState);
@@ -113,8 +106,7 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		// Serialize the current dropdown position.
-		outState.putInt(STATE_SELECTED_NAVIGATION_ITEM, getActionBar()
-				.getSelectedNavigationIndex());
+		outState.putInt(STATE_SELECTED_NAVIGATION_ITEM, getActionBar().getSelectedNavigationIndex());
 		super.onSaveInstanceState(outState);
 		webView.saveState(outState);
 	}
@@ -127,10 +119,8 @@ public class MainActivity extends FragmentActivity implements
 		return true;
 	}
 
-	String[] dropDownUrl = new String[] {
-			"file:///android_asset/en/Main_page.html",
-			"file:///android_asset/en/Beginners'_guide.html",
-			"file:///android_asset/en/Installation_guide.html" };
+	String[] dropDownUrl = new String[] { "file:///android_asset/en/Main_page.html",
+			"file:///android_asset/en/Beginners'_guide.html", "file:///android_asset/en/Installation_guide.html" };
 
 	@Override
 	public boolean onNavigationItemSelected(int position, long id) {
@@ -165,8 +155,7 @@ public class MainActivity extends FragmentActivity implements
 		}
 
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			// Create a new TextView and set its text to the fragment's section
 			// number argument value.
 			TextView textView = new TextView(getActivity());
