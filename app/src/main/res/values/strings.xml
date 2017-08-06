@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">ArchWikiManual</string>
-    <string name="title_begin">Beginner\'s Guide</string>
+    <string name="title_faq">FAQ</string>
     <string name="title_index">Index</string>
     <string name="title_main">Main Page</string>
     <string name="hello_world">Hello world!</string>
